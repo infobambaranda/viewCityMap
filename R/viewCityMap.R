@@ -19,6 +19,7 @@
 #' 
 #' @importFrom ggmap get_stamenmap ggmap 
 #' @importFrom ggplot2 geom_point geom_label labs aes
+#' @export
 #' 
 
 viewCityMap <- function(city_name, state_abb){
