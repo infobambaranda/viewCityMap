@@ -43,19 +43,19 @@ viewCityMap <- function(city_name, state_abb){
   
   # Finally, we use ggmap to pull the map data from Stamen Maps and use ggmap
   # and ggplot2 to plot the map and display extra information about the city:
-  citymap <- get_stamenmap(bbox = citybbox, maptype = "toner-hybrid")
+  citymap <- ggmap::get_stamenmap(bbox = citybbox, maptype = "toner-hybrid")
   
   plot <- 
     # Plots the map
-    ggmap(citymap) + 
+    ggmap::ggmap(citymap) + 
     
     # Plots a point where the city is located
-    geom_point(aes(x = longitude, y = latitude), 
+    ggplot2::geom_point(ggplot2::aes(x = longitude, y = latitude), 
                color = "red", 
                size = 3) + 
     
     # Plots a label for the city that shows the population
-    geom_label(aes(x = longitude, y = latitude + .075), 
+    ggplot2::geom_label(ggplot2::aes(x = longitude, y = latitude + .075), 
                color = "red",
                label = paste0(city_name, ", ", state_abb, "\n", 
                              "Population: ", population), size = 3) + 
