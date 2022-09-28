@@ -26,7 +26,7 @@
 viewCityMap <- function(city_name, state_abb){
   
   # First, we pull data for the city in question from the uscitydata data set:
-  citydata <- uscitydata[uscitydatafull$city_ascii == city_name,-16]
+  citydata <- uscitydata[uscitydata$city_ascii == city_name,-16]
   citydata <- citydata[citydata$state_id == state_abb,]
   
   # Next, we make note of the latitude, longitude, and population of the city:
