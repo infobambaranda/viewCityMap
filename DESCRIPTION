@@ -15,5 +15,6 @@ Depends:
     R (>= 2.10)
 Imports:
     ggmap,
-    ggplot2
+    ggplot2,
+    shiny,
 LazyData: true

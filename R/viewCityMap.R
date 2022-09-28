@@ -19,7 +19,9 @@
 #' 
 #' @importFrom ggmap get_stamenmap ggmap 
 #' @importFrom ggplot2 geom_point geom_label labs aes
+#' @import shiny
 #' 
+#' @export viewCityMap
 
 viewCityMap <- function(city_name, state_abb){
   
@@ -35,7 +37,7 @@ viewCityMap <- function(city_name, state_abb){
   # Then, we use the latitude and longitude to create a bounding box that 
   # ggmap can read to create the bounds of our map:
   citybbox <- c(bottom = latitude - .5,
-                top = latitude + .5, 
+                top = latitude + .5,
                 right = longitude + .5, 
                 left = longitude - .5)
   
@@ -62,6 +64,16 @@ viewCityMap <- function(city_name, state_abb){
     labs(x = "Longitude", 
          y = "Latitude")
   
-  return(plot)
+  # return(plot)
+  plot(plot)
 }
+
+#' ShinyApp
+#'
+#' @return returns the Shiny App
+#' @export myApp
+#'
+myApp <- function(){
+  shiny::runApp(appDir = system.file( "app", package="viewCityMap"))
+  }
 
