@@ -32,8 +32,8 @@ ui <- fluidPage(
 
 
 server <- function(input, output,session) {
-  updateSelectizeInput(session, 'cn', choices = c(uscitydata$city_ascii), server = TRUE)
-  updateSelectizeInput(session, 'st', choices = c(unique(uscitydata$state_id)), server = TRUE)
+  updateSelectizeInput(session, 'cn', choices = c(uscitydatafull), server = TRUE)
+  updateSelectizeInput(session, 'st', choices = c(unique(uscitydatafull$state_id)), server = TRUE)
   observeEvent(input$show_map, {
     city_name <- reactive({
       input$cn
