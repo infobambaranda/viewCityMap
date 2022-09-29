@@ -4,13 +4,18 @@
 \alias{viewCityMap}
 \title{viewCityMap}
 \usage{
-viewCityMap(city_name, state_abb)
+viewCityMap(city_name, state, map_type = "toner-hybrid")
 }
 \arguments{
 \item{city_name}{The name of the city being mapped}
 
-\item{state_abb}{The abbreviation of the state that the city is in. (e.g.
-New York = "NY")}
+\item{state}{The name of the state that the city is in}
+
+\item{map_type}{The format of map you would like to render. Default is
+"toner-hybrid." Available options: "terrain", "terrain-background",
+"terrain-labels", "terrain-lines", "toner", "toner-2010", "toner-2011",
+"toner-background", "toner-hybrid", "toner-labels", "toner-lines",
+"toner-lite", "watercolor"}
 }
 \description{
 A function that allows users to create a map of a city in the
@@ -26,4 +31,11 @@ URL \url{http://journal.r-project.org/archive/2013-1/kahle-wickham.pdf}
 
 US city data comes from the simplemaps United States Cities Database
 \url{https://simplemaps.com/data/us-cities}
+}
+\examples{
+viewCityMap("Phoenix", "Arizona") 
+viewCityMap("New York", "New York", "watercolor") 
+viewCityMap("Boston", "Massachusetts", "toner") 
+viewCityMap("Florence", "Arizona", "terrain")
+
 }
