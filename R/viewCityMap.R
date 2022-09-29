@@ -70,11 +70,10 @@ viewCityMap <- function(city_name, state, map_type = "toner-hybrid"){
                              "Population: ", population), size = 3) + 
     
     # Renames axes
-    labs(x = "Longitude", 
+    ggplot2::labs(x = "Longitude", 
          y = "Latitude")
   
-  # return(plot)
-  plot(plot)
+  return(plot)
 }
 
 #' ShinyApp

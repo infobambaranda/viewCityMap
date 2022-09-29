@@ -18,3 +18,7 @@ Imports:
     ggplot2,
     shiny,
 LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

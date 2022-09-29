@@ -1,53 +1,64 @@
 
 # Define UI for application that draws a histogram
-ui <- fluidPage(
+ui <- shiny::fluidPage(
 
     # Application title
-    titlePanel("United State City Map"),
+    shiny::titlePanel("United State City Map"),
 
     # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            selectizeInput("cn",
+    shiny::sidebarLayout(
+        shiny::sidebarPanel(
+            shiny::selectizeInput("cn",
                         "City name:",
                         #choices = c(uscitydata$city_ascii),
                         choices = NULL,
-                        selected = "Birmingham",
+                        
 
                         ),
-            selectInput("st",
+            shiny::selectInput("st",
                         "State:",
                         choices = NULL,
-                        selected = "AL",
                         ),
-            actionButton("show_map", "Show map!")
+            shiny::selectInput("mp",
+                        "Map Type:",
+                        choices = NULL,
+                        
+            ),
+            shiny::actionButton("show_map", "Show map!")
         ),
 
         # Show a plot of the generated distribution
-        mainPanel(
-          plotOutput("point_map")
+        shiny::mainPanel(
+          shiny::plotOutput("point_map")
         )
     )
 )
 
 
 server <- function(input, output,session) {
-  updateSelectizeInput(session, 'cn', choices = c(uscitydata), server = TRUE)
-  updateSelectizeInput(session, 'st', choices = c(unique(uscitydata$state_id)), server = TRUE)
-  observeEvent(input$show_map, {
+  # uscitydata <- load(uscitydata)
+  shiny::updateSelectizeInput(session, 'cn', choices = c(uscitydata), selected = "Albany",server = TRUE)
+  shiny::updateSelectizeInput(session, 'st', choices = c(unique(uscitydata$state_name)), selected = "New York", server = TRUE)
+  shiny::updateSelectizeInput(session, 'mp', choices = c("terrain", "terrain-background", "terrain-labels", "terrain-lines", 
+                                                  "toner", "toner-2010", "toner-2011", "toner-background", "toner-hybrid", 
+                                                  "toner-labels", "toner-lines", "toner-lite", "watercolor"), selected = "toner-hybrid", server = TRUE)
+  
+  
+  shiny::observeEvent(input$show_map, {
     city_name <- reactive({
       input$cn
     })
     state_abb <- reactive({
       input$st
     })
+    map_type <- reactive({
+      input$mp
+    })
 
-  map <- viewCityMap(city_name(),state_abb())
-  
-    output$point_map <- renderPlot({map})
+    output$point_map <- renderPlot({viewCityMap(city_name(),state_abb(),map_type())})
+
   })
-  
 }
 
 
-shinyApp(ui = ui, server = server)
+shiny::shinyApp(ui = ui, server = server)

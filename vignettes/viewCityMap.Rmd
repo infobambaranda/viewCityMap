@@ -1,0 +1,38 @@
+---
+title: "viewCityMap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{viewCityMap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+The package *viewCityMap* allows user to find the location of the given city in a given state of Unites State of America. It plots location in a map and shows the population of the selected city. The users are able to select the type of the map in which they want the location to be shown. The users are able to use Rstudio console or the UI created by shiny app to select the city and observe the location in the map.
+
+To illustrate output of the package let's use "Albany" as the city,  "New York" as the state and "toner-hybrid" as the type of the map.
+
+```{r}
+library(viewCityMap)
+viewCityMap("Albany","New York","toner-hybrid")
+
+```
+
+For this functionality a GUI is also implemented. User can load the GUI from the following command in the console. There are three drop down list where the user can select the city, state and map type.When the Show Map button is clicked, The relevant map will be loaded.
+
+```{r, eval = FALSE}
+runGitHub("viewCityMap","infobambaranda",subdir = "inst/app")
+```
+
+```{r, echo=FALSE}
+shiny::selectInput("cn", "City name:", choices= c("Albany"), selected = "Albany")
+shiny::selectInput("st", "State:", choices= c("New York"), selected = "New York")
+shiny::selectInput("mp", "Map Type:", choices= c("toner-hybrid"), selected = "toner-hybrid")
+shiny::actionButton("show_map", "Show map!")
+
+# map <- viewCityMap("Albany","New York","toner-hybrid")
+shiny::renderPlot({viewCityMap("Albany","New York","toner-hybrid")})
+
+
+```
