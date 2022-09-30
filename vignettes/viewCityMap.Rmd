@@ -3,27 +3,33 @@ title: "viewCityMap"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{viewCityMap}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+runtime: shiny
 ---
 
-## Introduction
+## Introduction and the viewCityMap() Function
 
-The package *viewCityMap* allows user to find the location of the given city in a given state of Unites State of America. It plots location in a map and shows the population of the selected city. The users are able to select the type of the map in which they want the location to be shown. The users are able to use Rstudio console or the UI created by shiny app to select the city and observe the location in the map.
+The package *viewCityMap* allows users to pull a map of any city in United States. The function **viewCityMap()** takes the name of a city and state as inputs, and it uses this information to plot a map of the city and the surrounding area using Stamen Maps API. **Please note:** the function uses the full name of both the city and state to match the internal data set being used, abbreviations will result in an error. Users are also able to select the type of map they want to see, based on the options available from Stamen Maps. The default is "toner-hybrid," but users may choose from the following options: "terrain", "terrain-background", "terrain-labels", "terrain-lines", "toner", "toner-2010", "toner-2011", "toner-background", "toner-hybrid", "toner-labels", "toner-lines", "toner-lite", "watercolor"
 
-To illustrate output of the package let's use "Albany" as the city,  "New York" as the state and "toner-hybrid" as the type of the map.
+To illustrate output of this function, let's look at the default map of Albany, New York
 
 ```{r}
 library(viewCityMap)
-viewCityMap("Albany","New York","toner-hybrid")
+viewCityMap("Albany","New York")
 
 ```
 
-For this functionality a GUI is also implemented. User can load the GUI from the following command in the console. There are three drop down list where the user can select the city, state and map type.When the Show Map button is clicked, The relevant map will be loaded.
+## The viewCityMap Shiny App
+
+The **viewCityMap** package also comes with a Shiny app that provides a graphical interface for users to request a map.
+To load this app, run the following command in the console:
 
 ```{r, eval = FALSE}
 runGitHub("viewCityMap","infobambaranda",subdir = "inst/app")
 ```
+
+This will open the menu shown below. There are three drop down menus where users can select the city, state, and map type they would like to see. When the "Show Map!" button is clicked, the relevant map will be loaded (and will be shown until a new map request is made. To search for a specific city, start typing the name of the city in the input box marked "City Name" and choose from the options shown in the drop down menu.
 
 ```{r, echo=FALSE}
 shiny::selectInput("cn", "City name:", choices= c("Albany"), selected = "Albany")
@@ -32,7 +38,5 @@ shiny::selectInput("mp", "Map Type:", choices= c("toner-hybrid"), selected = "to
 shiny::actionButton("show_map", "Show map!")
 
 # map <- viewCityMap("Albany","New York","toner-hybrid")
-shiny::renderPlot({viewCityMap("Albany","New York","toner-hybrid")})
-
-
+shiny::renderPlot({viewCityMap("Albany","New York")})
 ```

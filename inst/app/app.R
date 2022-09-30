@@ -3,7 +3,7 @@
 ui <- shiny::fluidPage(
 
     # Application title
-    shiny::titlePanel("United State City Map"),
+    shiny::titlePanel("United States City Map"),
 
     # Sidebar with a 
     shiny::sidebarLayout(
