@@ -17,7 +17,7 @@ Imports:
     ggmap,
     ggplot2,
     shiny,
-LazyData: false
+LazyData: true
 Suggests: 
     knitr,
     rmarkdown,

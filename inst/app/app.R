@@ -10,7 +10,8 @@ ui <- shiny::fluidPage(
         shiny::sidebarPanel(
           shiny::selectInput("st",
                              "State:",
-                             choices = c(unique(uscitydata$state_name)), selected = "New York"
+                             choices = c(unique(viewCityMap:::uscitydata$state_name)), 
+                             selected = "New York"
           ),
           shiny::selectizeInput("cn",
                                 "City name:",
@@ -38,7 +39,10 @@ ui <- shiny::fluidPage(
 
 
 server <- function(input, output,session) {
-  shiny::updateSelectizeInput(session, 'cn', choices = c(uscitydata$city_ascii), selected = "Albany",server = TRUE)
+  shiny::updateSelectizeInput(session, 
+                              'cn', 
+                              choices = c(viewCityMap:::uscitydata$city_ascii), 
+                              selected = "Albany",server = TRUE)
   
   
   shiny::observeEvent(input$show_map, {
