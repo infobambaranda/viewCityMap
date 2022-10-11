@@ -37,6 +37,9 @@ viewCityMap <- function(city_name, state, map_type = "toner-hybrid"){
   # First, we pull data for the city in question from the uscitydata data set:
   citydata <- uscitydata[uscitydata$city_ascii == city_name,-16]
   citydata <- citydata[citydata$state_name == state,]
+  if (nrow(citydata) < 1) {
+    stop(paste0("City of ", city_name, " is not in ", state))
+  }
   
   # Next, we make note of the latitude, longitude, and population of the city:
   latitude <- citydata[1, 'lat']

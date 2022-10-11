@@ -10,10 +10,6 @@ test_that("Incorrectly Formatted Inputs Throw an Error", {
           expect_error(viewCityMap("Los Angeles", "California", "google"))  # Map type not in list
           })
 
-# test_that("Function Successfully Connects to Stamen Maps", {
-#           expect_message(viewCityMap("Phoenix", "Arizona"), 
-#                          "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.")
-#           })
-#
-# This test works locally, but for some reason causes the github actions badge
-# to fail
+test_that("Function Successfully Connects to Stamen Maps", {
+          expect_message(viewCityMap("Phoenix", "Arizona"))
+          })
